@@ -1,19 +1,19 @@
-{% extends 'partials/base.html.twig' %}
+{%- extends 'partials/base.html.twig' -%}
 
-{% set show_onpage_menu = header.onpage_menu == true or header.onpage_menu is null %}
-{% macro pageLinkName(text) %}{{ text|lower|replace({' ':'_'}) }}{% endmacro %}
+{%- set show_onpage_menu = header.onpage_menu == true or header.onpage_menu is null -%}
+{%- macro pageLinkName(text) -%}{{ text|lower|replace({' ':'_'}) }}{%- endmacro -%}
 
-{% block javascripts %}
-    {% if show_onpage_menu %}
-        {% do assets.add('theme://js/singlePageNav.min.js') %}
-    {% endif %}
+{%- block javascripts -%}
+    {%- if show_onpage_menu -%}
+        {%- do assets.add('theme://js/singlePageNav.min.js') -%}
+    {%- endif -%}
     {{ parent() }}
-{% endblock %}
+{%- endblock -%}
 
 
-{% block bottom %}
+{%- block bottom -%}
     {{ parent() }}
-    {% if show_onpage_menu %}
+    {%- if show_onpage_menu -%}
         <script>
         // singlePageNav initialization & configuration
         $('#navbar').singlePageNav({
@@ -23,34 +23,34 @@
             currentClass: 'active'
         });
         </script>
-    {% endif %}
-{% endblock %}
+    {%- endif -%}
+{%- endblock -%}
 
-{% block header_navigation %}
-    {% if show_onpage_menu %}
+{%- block header_navigation -%}
+    {%- if show_onpage_menu -%}
         <ul class="navigation">
-        {% for module in page.collection() %}
-            {% set current_module = (module.active or module.activeChild) ? 'active' : '' %}
+        {%- for module in page.collection() -%}
+            {%- set current_module = (module.active or module.activeChild) ? 'active' : '' -%}
             <li class="{{ current_module }}"><a href="#{{ _self.pageLinkName(module.menu) }}">{{ module.menu }}</a></li>
-        {% endfor %}
-        {% for mitem in site.menu %}
+        {%- endfor -%}
+        {%- for mitem in site.menu -%}
             <li>
                 <a href="{{ mitem.url }}">
-                    {% if mitem.icon %}<i class="fa fa-{{ mitem.icon }}"></i>{% endif %}
+                    {%- if mitem.icon -%}<i class="fa fa-{{ mitem.icon }}"></i>{%- endif -%}
                     {{ mitem.text }}
                 </a>
             </li>
-        {% endfor %}
+        {%- endfor -%}
         </ul>
-    {% else %}
+    {%- else -%}
         {{  parent() }}
-    {% endif %}
-{% endblock %}
+    {%- endif -%}
+{%- endblock -%}
 
-{% block content %}
+{%- block content -%}
     {{ page.content }}
-    {% for module in page.collection() %}
+    {%- for module in page.collection() -%}
         <div id="{{ _self.pageLinkName(module.menu) }}"></div>
         {{ module.content }}
-    {% endfor %}
-{% endblock %}
+    {%- endfor -%}
+{%- endblock -%}
