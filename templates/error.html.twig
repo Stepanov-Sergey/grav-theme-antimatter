@@ -1,6 +1,6 @@
-{% extends 'partials/base.html.twig' %}
+{%- extends 'partials/base.html.twig' -%}
 
-{% block content %}
+{%- block content -%}
 	<div id="error">
 		<div>
 			<h1>{{ 'ERROR'|t }} {{ page.header.http_response_code }}</h1>
@@ -9,4 +9,4 @@
 			</p>
 		</div>
 	</div>
-{% endblock %}
+{%- endblock -%}
