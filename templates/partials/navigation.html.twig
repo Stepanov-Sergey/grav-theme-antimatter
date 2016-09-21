@@ -1,3 +1,4 @@
+{% spaceless %}
 {%- macro loop(page) -%}
     {%- for p in page.children.visible -%}
         {%- set current_page = (p.active or p.activeChild) ? 'active' : '' -%}
@@ -49,3 +50,4 @@
         <li><i class="fa fa-lock"></i> {%- include 'partials/login-status.html.twig' -%}</li>
     {%- endif -%}
 </ul>
+{% endspaceless %}
